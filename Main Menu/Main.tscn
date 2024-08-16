@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://5brjispje4c5"]
+
+[ext_resource type="FontFile" uid="uid://bnk1dedq8vfhp" path="res://Fonts/Caveat-Bold.ttf" id="1_iqp05"]
+[ext_resource type="Script" path="res://Main Menu/MenuController.gd" id="2_71dlh"]
+[ext_resource type="Theme" uid="uid://ckjkbqlv3sbep" path="res://Main Menu/MainMenuTheme.tres" id="3_ey01x"]
+[ext_resource type="Texture2D" uid="uid://dvqnm520trfyk" path="res://Main Menu/squid meeting.jpg" id="3_o6jem"]
+
+[node name="Main" type="Node"]
+
+[node name="UI Layer" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="UI Layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -248.0
+offset_right = 640.0
+offset_bottom = -147.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_iqp05")
+theme_override_font_sizes/font_size = 80
+text = "Crow Cafe"
+horizontal_alignment = 1
+
+[node name="Menu" type="Control" parent="UI Layer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_71dlh")
+
+[node name="Play" type="Button" parent="UI Layer/Menu"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 300.0
+offset_right = 879.0
+offset_bottom = 371.0
+theme = ExtResource("3_ey01x")
+theme_override_fonts/font = ExtResource("1_iqp05")
+theme_override_font_sizes/font_size = 50
+text = "Play
+"
+
+[node name="Quit" type="Button" parent="UI Layer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 389.0
+offset_top = 380.0
+offset_right = 869.0
+offset_bottom = 451.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ey01x")
+theme_override_fonts/font = ExtResource("1_iqp05")
+theme_override_font_sizes/font_size = 50
+text = "Quit
+"
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.259294, 0.259294, 0.259294, 1)
+position = Vector2(640, 360)
+texture = ExtResource("3_o6jem")
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="UI Layer/Menu/Play" to="UI Layer/Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="UI Layer/Menu/Quit" to="UI Layer/Menu" method="_on_quit_pressed"]
