@@ -1,0 +1,2 @@
+- Owl character, a student (of literature?) microgames are themed around study/books. They would speak using a lot of fancy vocabulary, even if the word doesnt make sense in that moment. Perchance.
+    - Game idea: flip to the right page (have to move your mouse back and forth rapidly enough to get to the right page)

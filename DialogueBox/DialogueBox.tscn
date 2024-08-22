@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwbi0h0wap8i7"]
+
+[ext_resource type="Script" path="res://DialogueBox/DialogueBox.gd" id="1_726vy"]
+[ext_resource type="Texture2D" uid="uid://b5myprwctjncq" path="res://DialogueBox/ohmygah.png" id="2_etuod"]
+[ext_resource type="Theme" uid="uid://c0pbskr17xd88" path="res://DialogueBox/DialogueBoxTheme.tres" id="3_7baum"]
+[ext_resource type="Texture2D" uid="uid://b52p07lsi8t2w" path="res://Images/rectangle.png" id="4_m2m7y"]
+[ext_resource type="FontFile" uid="uid://bnk1dedq8vfhp" path="res://Fonts/Caveat-Bold.ttf" id="4_nvp2f"]
+[ext_resource type="FontFile" uid="uid://kt5ummtb244t" path="res://Fonts/Kalam-Regular.ttf" id="5_i45xs"]
+[ext_resource type="Texture2D" uid="uid://rb4u46xlkjq2" path="res://Images/kenney_icon_sheet.png" id="6_5u5ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiopb"]
+atlas = ExtResource("6_5u5ks")
+region = Rect2(400, 300, 50, 50)
+
+[sub_resource type="Animation" id="Animation_yeagj"]
+resource_name = "Move"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1e-05, 1e-05),
+"update": 0,
+"values": [Vector2(1200, 225), Vector2(1200, 220)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfab8"]
+_data = {
+"Move": SubResource("Animation_yeagj")
+}
+
+[node name="Textbox Area" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("1_726vy")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1130, 288)
+scale = Vector2(0.652655, 0.612016)
+texture = ExtResource("2_etuod")
+
+[node name="TextBox" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -286.0
+offset_right = -13.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_7baum")
+
+[node name="Name" type="Label" parent="TextBox"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 29.0
+offset_right = 1236.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(1, 0.649496, 0.697237, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_nvp2f")
+theme_override_font_sizes/font_size = 50
+text = "Osaka Azumanga"
+
+[node name="Dialogue" type="Label" parent="TextBox"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 100.0
+offset_right = 1222.0
+offset_bottom = 251.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_i45xs")
+theme_override_font_sizes/font_size = 30
+text = "Test Text oh my gah or something hahaha azumanga daiohhhhhh so for this microgame your challenge is to find a reason to keep going (in 6 seconds or less)"
+autowrap_mode = 2
+
+[node name="Char Timer" type="Timer" parent="TextBox"]
+wait_time = 0.05
+one_shot = true
+
+[node name="Down Arrow" type="Sprite2D" parent="TextBox"]
+visible = false
+modulate = Color(0.264865, 0.180396, 0.0276672, 1)
+position = Vector2(1200, 225)
+texture = SubResource("AtlasTexture_qiopb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextBox/Down Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_dfab8")
+}
+
+[node name="Background Dim" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.564706)
+z_index = -2
+position = Vector2(640, 360)
+texture = ExtResource("4_m2m7y")
+metadata/_edit_lock_ = true
+
+[connection signal="timeout" from="TextBox/Char Timer" to="." method="_on_char_timer_timeout"]

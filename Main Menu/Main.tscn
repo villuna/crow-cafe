@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://ckjkbqlv3sbep" path="res://Main Menu/MainMenuTheme.tres" id="3_ey01x"]
 [ext_resource type="Texture2D" uid="uid://dvqnm520trfyk" path="res://Main Menu/squid meeting.jpg" id="3_o6jem"]
 [ext_resource type="Texture2D" uid="uid://b52p07lsi8t2w" path="res://Images/rectangle.png" id="4_dtsuw"]
-[ext_resource type="PackedScene" uid="uid://bwbi0h0wap8i7" path="res://Text Box/text_box.tscn" id="6_x0lfk"]
+[ext_resource type="PackedScene" uid="uid://bwbi0h0wap8i7" path="res://DialogueBox/DialogueBox.tscn" id="6_x0lfk"]
 
 [node name="Main" type="Node"]
 script = ExtResource("2_71dlh")
@@ -80,10 +80,11 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="Textbox Layer" type="CanvasLayer" parent="."]
+[node name="DialogueBox Layer" type="CanvasLayer" parent="."]
 
-[node name="Textbox Area" parent="Textbox Layer" instance=ExtResource("6_x0lfk")]
+[node name="DialogueBox" parent="DialogueBox Layer" instance=ExtResource("6_x0lfk")]
 visible = false
 
 [connection signal="pressed" from="Menu Layer/Menu/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu Layer/Menu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="dialogue_event" from="DialogueBox Layer/DialogueBox" to="." method="_on_textbox_area_dialogue_event"]
